@@ -713,39 +713,35 @@ let musikNyala = false;
 ========================= */
 
 function ketik(element,text,kecepatan=35){
-
     element.innerHTML="";
-
     let i=0;
 
     function tulis(){
-
-        if(i<text.length){
+        if(i < text.length){
 
             if(text.substring(i,i+4)==="<br>"){
-
-                element.innerHTML+="<br>";
-
-                i+=4;
-
+                element.innerHTML += "<br>";
+                i += 4;
             }
+            else if(text.substring(i,i+3)==="<b>"){
+                let akhir = text.indexOf("</b>", i);
 
+                if(akhir !== -1){
+                    let isi = text.substring(i+3, akhir);
+                    element.innerHTML += "<b>" + isi + "</b>";
+                    i = akhir + 4;
+                }
+            }
             else{
-
-                element.innerHTML+=text.charAt(i);
-
+                element.innerHTML += text.charAt(i);
                 i++;
-
             }
 
             setTimeout(tulis,kecepatan);
-
         }
-
     }
 
     tulis();
-
 }
 
 
